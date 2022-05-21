@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-sql-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-sql
+  template:
+    metadata:
+      labels:
+        app: auth-sql
+    spec:
+      containers:
+        - name: auth-sql
+          image: mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+            - name: MYSQL_DATABASE
+              value: ehoomes_auth
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-sql-srv
+spec:
+  selector:
+    app: auth-sql
+  ports:
+    - name: db
+      protocol: TCP
+      port: 3306
+      targetPort: 3306
