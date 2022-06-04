@@ -20,7 +20,13 @@ spec:
               value: root
             - name: MYSQL_DATABASE
               value: ehoomes_auth
-
+          volumeMounts:
+            - name: mysql-persistant-storage
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-persistant-storage
+          persistentVolumeClaim:
+            claimName: mysql-pv-claim
 ---
 apiVersion: v1
 kind: Service
@@ -34,3 +40,17 @@ spec:
       protocol: TCP
       port: 3306
       targetPort: 3306
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+  labels:
+    app: auth-sql
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi

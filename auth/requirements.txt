@@ -3,3 +3,4 @@ djangorestframework
 djoser
 djangorestframework_simplejwt
 mysqlclient
+django-cors-headers

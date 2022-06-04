@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'i)w6!98nns-611!o4ji)3h4tn7ea_n24od89-o_)w(z7!6m6ao'
+SECRET_KEY = 'xxxxxxxxxx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ehoomes.com']
+ALLOWED_HOSTS = ['ehoomes.com','127.0.0.1']
 
 # error handling and djoser setup
 REST_FRAMEWORK = {
@@ -41,12 +41,9 @@ DJOSER = {
     'LOGIN_FIELD': 'email',
     'USER_CREATE_PASSWORD_RETYPE': True,
     'PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND':True,
-    'SEND_CONFIRMATION_EMAIL': True,
-    'SEND_ACTIVATION_EMAIL': True,
-    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
-    'PASSWORD_RESET_CONFIRM_RETYPE': True,
-    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL': 'activate/{uid}/{token}',
+    'SEND_CONFIRMATION_EMAIL': False,
+    'SEND_ACTIVATION_EMAIL': False,
+    'PASSWORD_CHANGED_EMAIL_CONFIRMATION': False,
     'SERIALIZERS': {
         'user_create': 'authentication.serializer.UserSerialiser',
         'user': 'authentication.serializer.UserSerialiser',
@@ -62,7 +59,7 @@ SIMPLE_JWT = {
     'UPDATE_LAST_LOGIN': True,
 
     'ALGORITHM': 'HS256',
-    'SIGNING_KEY': 'Mukundijoe254#vveyf$jleghreyy74',
+    'SIGNING_KEY': 'xxxxxxxxxxxx',
     'VERIFYING_KEY': None,
     'AUDIENCE': None,
     'ISSUER': None,
@@ -99,6 +96,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'authentication.apps.AuthenticationConfig',
     'djoser',
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -109,6 +107,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = 'auth.urls'
@@ -139,10 +138,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ehoomes_auth',
-        'USER': 'root',
+        'USER': 'xxxx',
         'HOST': 'auth-sql-srv',
         'PORT': '3306',
-        'PASSWORD': 'root',
+        'PASSWORD': 'xxxxx',
     }
 }
 
@@ -166,11 +165,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'mail.davee.co.ke'
+EMAIL_HOST = 'mail.xxxxxxxxx.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'ehoomes@argoninvestment.cash'
-EMAIL_HOST_PASSWORD = 'Mukundijoe254'
+EMAIL_HOST_USER = 'xxx@xxxxxxx.com'
+EMAIL_HOST_PASSWORD = 'xxxxxxxxxx'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -190,3 +189,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+CORS_ALLOW_ALL_ORIGINS = True
