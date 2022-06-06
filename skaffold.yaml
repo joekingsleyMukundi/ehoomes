@@ -16,3 +16,11 @@ build:
         manual:
           - dest: .
             src: "**"
+    - image: joekingsleymukundi/host
+      context: host
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: "**"

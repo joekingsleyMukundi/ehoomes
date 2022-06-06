@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'Host.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ehoomes_host',
+        'USER': 'root',
+        'HOST': 'host-sql-srv',
+        'PORT': '3306',
+        'PASSWORD': 'root',
     }
 }
 

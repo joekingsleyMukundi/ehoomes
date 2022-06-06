@@ -1,36 +1,36 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth-depl
+  name: host-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: auth
+      app: host
   template:
     metadata:
       labels:
-        app: auth
+        app: host
 
     spec:
       containers:
-        - name: auth
-          image: joekingsleymukundi/auth
+        - name: host
+          image: joekingsleymukundi/host
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-srv
+  name: host-srv
 spec:
   selector:
-    app: auth
+    app: host
   ports:
-    - name: auth
+    - name: host
       protocol: TCP
       port: 8000
-      targetPort: 8080
-    - name: auth-mail
+      targetPort: 8000
+    - name: host-mail
       protocol: TCP
       port: 587
       targetPort: 587

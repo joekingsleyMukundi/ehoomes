@@ -16,4 +16,11 @@ spec:
               service:
                 name: auth-srv
                 port:
+                  number: 8080
+          - pathType: Prefix
+            path: "/host/?(.*)"
+            backend:
+              service:
+                name: host-srv
+                port:
                   number: 8000
