@@ -60,7 +60,7 @@ class ChangePasswordSerializer(serializers.Serializer):
             user.set_password(password)
             user.save()
             subject = 'Password reset success'
-            message = 'Your password has succcesfully ben reset'
+            message = 'Your password has succcesfully been reset'
             send_custom_email(subject,message,user.email)
             return user;
         except Exception as e:
