@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  hosts:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/app
+    depends_on:
+      - db_host
+
+  db_host:
+    image: mysql:5.7.22
+    restart: always
+    environment:
+      MYSQL_DATABASE: ehomes_host
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - .dbdata:/var/lib/mysql
+    ports:
+      - 3307:3306
