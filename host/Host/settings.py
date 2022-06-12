@@ -73,16 +73,16 @@ WSGI_APPLICATION = 'Host.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'ehomes_host',
-#         'USER': 'root',
-#         'HOST': 'db_host',
-#         'PORT': '3306',
-#         'PASSWORD': 'root',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ehomes_host',
+        'USER': 'root',
+        'HOST': 'db',
+        'PORT': '3306',
+        'PASSWORD': 'root',
+    }
+}
 
 
 # Password validation

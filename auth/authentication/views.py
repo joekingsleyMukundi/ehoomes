@@ -45,8 +45,12 @@ def documentation(request):
 @api_view(['GET'])
 @user_active
 def activate(request, uid, token):
-  id = smart_str(urlsafe_base64_decode(uid))
-  print(id)
+  try:
+    id = smart_str(urlsafe_base64_decode(uid))
+    print(id)
+  except Exception as e:
+    print(e)
+    raise Exception(e)
   if not CustomUser.objects.filter(id = id).exists():
     raise Exception('user does not exist')
   user = CustomUser.objects.get(id = id)
@@ -54,8 +58,12 @@ def activate(request, uid, token):
   if token != user_token:
     raise Exception('invalid token')
   user.is_active = True
-  user.activationtoken = None
-  user.save()
+  # user.activationtoken = None
+  try:
+    user.save()
+  except Exception as e:
+    print(e)
+    raise Custom500error(e)
   print('success')
   serializer = UserSerialiser(user, many=False)
   return Response(serializer.data)
