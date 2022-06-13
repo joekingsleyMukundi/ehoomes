@@ -60,7 +60,7 @@ SIMPLE_JWT = {
     'UPDATE_LAST_LOGIN': True,
 
     'ALGORITHM': 'HS256',
-    'SIGNING_KEY': 'Mukundijoe254#vveyf$jleghreyy74',
+    'SIGNING_KEY': os.getenv('SIGNINGKEY'),
     'VERIFYING_KEY': None,
     'AUDIENCE': None,
     'ISSUER': None,
