@@ -9,9 +9,9 @@ services:
     depends_on:
       - db
 
-  host:
+  customers:
     build:
-      context: ./host
+      context: ./customers
       dockerfile: Dockerfile
     ports:
       - 8000:8000
