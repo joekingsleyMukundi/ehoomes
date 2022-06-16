@@ -1,4 +1,4 @@
-import pika
+import pika, json
 # package to help send events
 params = pika.URLParameters('amqps://nqsdtgdi:CBnX14b-56LW_49P7SFMRudTTAFg8keX@rat.rmq2.cloudamqp.com/nqsdtgdi')
 connection = pika.BlockingConnection(params)
@@ -8,7 +8,8 @@ channel.queue_declare(queue = 'auth')
 
 def callback(ch, method, properties, body):
   print('messge recived in consumer')
-  print(body)
+  data = json.loads(body)
+  print(data)
 
 channel.basic_consume(queue='auth', on_message_callback=callback, auto_ack=True)
 print('started consuming')

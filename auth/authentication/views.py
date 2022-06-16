@@ -43,15 +43,18 @@ def documentation(request):
     ]
   return Response(routes)
 
+# activating the user view
 @api_view(['GET'])
 @user_active
 def activate(request, uid, token):
+  # retreving the id from the encoded string in the url
   try:
     id = smart_str(urlsafe_base64_decode(uid))
     print(id)
   except Exception as e:
     print(e)
     raise Exception(e)
+  # check wheather the user exists
   if not CustomUser.objects.filter(id = id).exists():
     raise Exception('user does not exist')
   user = CustomUser.objects.get(id = id)
@@ -59,9 +62,10 @@ def activate(request, uid, token):
   if token != user_token:
     raise Exception('invalid token')
   user.is_active = True
-  # user.activationtoken = None
   try:
     user.save()
+    # publishing a message to all consumers regarding the created user
+    publish('user_created', user)
   except Exception as e:
     print(e)
     raise Custom500error(e)
@@ -101,7 +105,6 @@ def set_new_password(request):
 def getUsers(request):
   users = CustomUser.objects.all()
   serializer = UserSerialiser(users, many=True)
-  publish()
   return Response(serializer.data)
 
 @api_view(['GET'])
