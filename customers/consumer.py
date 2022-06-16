@@ -4,13 +4,13 @@ params = pika.URLParameters('amqps://nqsdtgdi:CBnX14b-56LW_49P7SFMRudTTAFg8keX@r
 connection = pika.BlockingConnection(params)
 channel = connection.channel()
 
-channel.queue_declare(queue = 'admin')
+channel.queue_declare(queue = 'auth')
 
 def callback(ch, method, properties, body):
-  print('messge recived in auth')
+  print('messge recived in consumer')
   print(body)
 
-channel.basic_consume(queue='admin', on_message_callback=callback, auto_ack=True)
+channel.basic_consume(queue='auth', on_message_callback=callback, auto_ack=True)
 print('started consuming')
 channel.start_consuming()
 channel.close()

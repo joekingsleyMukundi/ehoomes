@@ -11,6 +11,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializer import *
 from .models import CustomUser
+from .producer import publish
 from decorators.customdecorators import *
 
 # Create your views here.
@@ -100,6 +101,7 @@ def set_new_password(request):
 def getUsers(request):
   users = CustomUser.objects.all()
   serializer = UserSerialiser(users, many=True)
+  publish()
   return Response(serializer.data)
 
 @api_view(['GET'])
