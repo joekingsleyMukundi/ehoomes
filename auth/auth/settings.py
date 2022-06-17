@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 from datetime import timedelta
 import os
-
+from dotenv import load_dotenv
+load_dotenv()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'i)w6!98nns-611!o4ji)3h4tn7ea_n24od89-o_)w(z7!6m6ao'
+SECRET_KEY = os.getenv('DJANGOSECRETKEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -59,7 +60,7 @@ SIMPLE_JWT = {
     'UPDATE_LAST_LOGIN': True,
 
     'ALGORITHM': 'HS256',
-    'SIGNING_KEY': 'Mukundijoe254#vveyf$jleghreyy74',
+    'SIGNING_KEY': os.getenv('SIGNINGKEY'),
     'VERIFYING_KEY': None,
     'AUDIENCE': None,
     'ISSUER': None,
@@ -137,9 +138,9 @@ WSGI_APPLICATION = 'auth.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ehoomes_auth',
+        'NAME': 'ehomes_auth',
         'USER': 'root',
-        'HOST': 'auth-sql-srv',
+        'HOST': 'db',
         'PORT': '3306',
         'PASSWORD': 'root',
     }
@@ -165,11 +166,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'mail.novaluxicawriters.com'
+EMAIL_HOST = os.getenv('EMAILHOST')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'ehoomes@novaluxicawriters.com'
-EMAIL_HOST_PASSWORD = 'Mukundijoe254'
+EMAIL_HOST_USER = os.getenv('EMAILHOSTUSER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAILHOSTPASSWORD')
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/

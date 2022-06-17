@@ -1,0 +1,19 @@
+import pika, json, os
+from dotenv import load_dotenv
+load_dotenv()
+# package to help consume events
+params = pika.URLParameters(os.getenv('RABBITMQURLPARAMS'))
+connection = pika.BlockingConnection(params)
+channel = connection.channel()
+
+channel.queue_declare(queue = 'auth')
+
+def callback(ch, method, properties, body):
+  print('messge recived in consumer')
+  data = json.loads(body)
+  print(data)
+
+channel.basic_consume(queue='auth', on_message_callback=callback, auto_ack=True)
+print('started consuming')
+channel.start_consuming()
+channel.close()

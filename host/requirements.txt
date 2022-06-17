@@ -1,6 +1,0 @@
-Django
-djangorestframework
-djangorestframework_simplejwt
-mysqlclient
-django-cors-headers
-pika

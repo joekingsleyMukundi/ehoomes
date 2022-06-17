@@ -13,7 +13,7 @@ class UserSerialiser(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ['id', 'email',
-                  'username', 'phone', 'is_host', 'is_verified', 'is_active']
+                  'username', 'phone', 'is_host', 'is_verified', 'is_active', 'activationtoken']
 
 class ChangePasswordRequestSerializer(serializers.Serializer):
     email = serializers.EmailField(min_length = 2)

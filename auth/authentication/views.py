@@ -11,25 +11,27 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from .serializer import *
 from .models import CustomUser
+from .producer import publish
 from decorators.customdecorators import *
 
 # Create your views here.
 
+# creting a custom jwt generator class to add more items to the token
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
 
-        # Add custom claims
+        # Add custom claims in our case adding the username
         token['username'] = user.username
         # ...
 
         return token
-
+# creating a class based view for the jwt url inheriting the token generator class above
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
-
+# creating a documentation view with all the urls available
 @api_view(['GET'])
 @permission_classes((IsAuthenticated, ))
 def documentation(request):
@@ -42,11 +44,18 @@ def documentation(request):
     ]
   return Response(routes)
 
+# activating the user view
 @api_view(['GET'])
 @user_active
 def activate(request, uid, token):
-  id = smart_str(urlsafe_base64_decode(uid))
-  print(id)
+  # retreving the id from the encoded string in the url
+  try:
+    id = smart_str(urlsafe_base64_decode(uid))
+    print(id)
+  except Exception as e:
+    print(e)
+    raise Exception(e)
+  # check wheather the user exists
   if not CustomUser.objects.filter(id = id).exists():
     raise Exception('user does not exist')
   user = CustomUser.objects.get(id = id)
@@ -54,8 +63,13 @@ def activate(request, uid, token):
   if token != user_token:
     raise Exception('invalid token')
   user.is_active = True
-  user.activationtoken = None
-  user.save()
+  try:
+    user.save()
+    # publishing a message to all consumers regarding the created user
+    publish('user_created', user)
+  except Exception as e:
+    print(e)
+    raise Custom500error(e)
   print('success')
   serializer = UserSerialiser(user, many=False)
   return Response(serializer.data)
