@@ -16,21 +16,22 @@ from decorators.customdecorators import *
 
 # Create your views here.
 
+# creting a custom jwt generator class to add more items to the token
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
 
-        # Add custom claims
+        # Add custom claims in our case adding the username
         token['username'] = user.username
         # ...
 
         return token
-
+# creating a class based view for the jwt url inheriting the token generator class above
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
-
+# creating a documentation view with all the urls available
 @api_view(['GET'])
 @permission_classes((IsAuthenticated, ))
 def documentation(request):

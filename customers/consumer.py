@@ -1,6 +1,8 @@
-import pika, json
-# package to help send events
-params = pika.URLParameters('amqps://nqsdtgdi:CBnX14b-56LW_49P7SFMRudTTAFg8keX@rat.rmq2.cloudamqp.com/nqsdtgdi')
+import pika, json, os
+from dotenv import load_dotenv
+load_dotenv()
+# package to help consume events
+params = pika.URLParameters(os.getenv('RABBITMQURLPARAMS'))
 connection = pika.BlockingConnection(params)
 channel = connection.channel()
 
