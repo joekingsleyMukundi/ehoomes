@@ -11,7 +11,7 @@ class TestModels(TestCase):
     self.assertEqual(self.user.email, 'test@gmail.com')
   
   def test_tenant_dashboard_model(self):
-    self.tenant_dashboard = keja_tenant_dashboard.objects.create(my_active_rooms=1, user=user, expected_rent=2, pending_charges=3, my_pending_rooms=4)
+    self.tenant_dashboard = keja_tenant_dashboard.objects.create(my_active_rooms=1, user=self.user, expected_rent=2, pending_charges=3, my_pending_rooms=4)
     self.assertEqual(self.tenant_dashboard.my_active_rooms, 1)
     self.assertEqual(self.tenant_dashboard.expected_rent, 2)
     self.assertEqual(self.tenant_dashboard.pending_charges, 3)
@@ -21,7 +21,7 @@ class TestModels(TestCase):
     self.assertEqual(self.tenant_dashboard.user.email, 'test@gmail.com')
 
   def test_keja_invoices(self):
-    self.keja_invoices = keja_invoices.objects.create(invoice_id='1', invoice_name='test', user=user, invoice_status='test', invoice_number='1', invoice_date='test')
+    self.keja_invoices = keja_invoices.objects.create(invoice_id='1', invoice_name='test', user=self.user, invoice_status='test', invoice_number='1', invoice_date='test')
     self.assertEqual(self.keja_invoices.invoice_id, '1')
     self.assertEqual(self.keja_invoices.invoice_name, 'test')
     self.assertEqual(self.keja_invoices.invoice_status, 'test')
