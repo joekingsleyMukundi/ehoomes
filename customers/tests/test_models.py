@@ -4,7 +4,7 @@ from tenant.models import *
 
 class TestModels(TestCase):
     def setUp(self):
-        self.user = users_model.objects.create(username='test', user_user_phone='123456789', email='test@gmail.com')
+        self.user = users_model.objects.create(username='test', user_phone='123456789', email='test@gmail.com')
 
     def test_user_model(self):
         self.assertEqual(self.user.username, 'test')

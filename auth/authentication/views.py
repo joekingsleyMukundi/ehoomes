@@ -24,6 +24,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         # Add custom claims in our case adding the username
         token['username'] = user.username
+        token['is_active']= user.is_active
         # ...
 
         return token

@@ -7,7 +7,6 @@ from .serializers import *
 
 # Create your views here.
 @api_view(['GET'])
-@permission_classes((IsAuthenticated, ))
 def tenant_dashboard(request):
   userEmail = request.user.email
   tenant = keja_tenant_dashboard.objects.get({'email':userEmail})
@@ -16,7 +15,6 @@ def tenant_dashboard(request):
 
 
 @api_view(['GET'])
-@permission_classes((IsAuthenticated, ))
 def user_profile(request):
   if  request.method == 'POST':
     serializer = UpdateUserProfileSerializer(data=request.data)
