@@ -9,7 +9,7 @@ class TenantDashboardSerializer(serializers.ModelSerializer):
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = keja_user_profile
+        model = user
         fields = '__all__'
 
 class UpdateUserProfileSerializer(serializers.ModelSerializer):

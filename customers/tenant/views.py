@@ -23,4 +23,8 @@ def user_profile(request):
     serializer = UpdateUserProfileSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     return Response({"success": True, 'user': serializer.data},status=HTTP_200_OK)
-  return Response({request.user})
+
+  userEmail = request.user.email
+  user = user.objects.get({'email':userEmail})
+  serializer = UserProfileSerializer(user, many=False)
+  return Response(serializer.data)
