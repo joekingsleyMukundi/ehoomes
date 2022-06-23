@@ -13,10 +13,10 @@ class users(models.Model):
 class keja_tenant_dashboard(models.Model):
   id = models.AutoField(primary_key = True);
   user = models.ForeignKey(users, on_delete=models.CASCADE)
-  my_active_rooms = models.IntegerField();
-  expected_rent = models.IntegerField();
-  pending_charges = models.IntegerField();
-  my_pending_rooms = models.IntegerField();
+  my_active_rooms = models.IntegerField(default=0);
+  expected_rent = models.IntegerField(default=0);
+  pending_charges = models.IntegerField(default=0);
+  my_pending_rooms = models.IntegerField(default=0);
 
 class keja_invoices(models.Model):
   id = models.AutoField(primary_key=True);

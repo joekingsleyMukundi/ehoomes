@@ -1,4 +1,3 @@
-from distutils.log import error
 from rest_framework.views import exception_handler
 def custom_error_handler(exc, context):
   response = exception_handler(exc, context)
