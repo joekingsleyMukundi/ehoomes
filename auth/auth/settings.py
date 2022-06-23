@@ -26,7 +26,7 @@ SECRET_KEY = os.getenv('DJANGOSECRETKEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ehoomes.com','127.0.0.1']
+ALLOWED_HOSTS = ['ehoomes.com','127.0.0.1','auth']
 
 # error handling and djoser setup
 REST_FRAMEWORK = {

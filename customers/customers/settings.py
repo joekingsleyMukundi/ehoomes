@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv('DJANGOCUSTOMERSECRETKEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["auth"]
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tenant.apps.TenantConfig'
 ]
 
 MIDDLEWARE = [
