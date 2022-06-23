@@ -6,3 +6,8 @@ mysqlclient
 django-cors-headers
 pika
 python-dotenv
+pytest-django
+pytest-factoryboy
+Faker
+pytest-cov
+requests
