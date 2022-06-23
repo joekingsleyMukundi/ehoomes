@@ -1,6 +1,7 @@
 from rest_framework import serializers
-from errors import *
 from .models import *
+from  errors import db_error
+
 
 class TenantDashboardSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,7 +10,7 @@ class TenantDashboardSerializer(serializers.ModelSerializer):
 
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = user
+        model = users_model
         fields = '__all__'
 
 class UpdateUserProfileSerializer(serializers.ModelSerializer):
@@ -27,7 +28,7 @@ class UpdateUserProfileSerializer(serializers.ModelSerializer):
     phone = data.get('phone')
     # save changed data to the database
     try:
-      user = users.objects.get(id=id)
+      user = users_model.objects.get(id=id)
       user.username = username
       user.phone=phone
       user.email = email
@@ -35,4 +36,4 @@ class UpdateUserProfileSerializer(serializers.ModelSerializer):
       return user
     except Exception as e:
       print(e)
-      raise db_connection_error.DbConnectionError(e)
+      raise db_error.DbConnectionError(e)
