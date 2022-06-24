@@ -34,9 +34,6 @@ ALLOWED_HOSTS = ["127.0.0.1"]
 
 REST_FRAMEWORK = {
     'EXCEPTION_HANDLER': 'utils.custom_error_handler.custom_error_handler',
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
 }
 
 

@@ -11,3 +11,4 @@ pytest-factoryboy
 Faker
 pytest-cov
 requests
+pyjwt

@@ -5,12 +5,12 @@ class users_model(models.Model):
   id =  models.AutoField(primary_key=True)
   username =  models.CharField(max_length=200,)
   user_phone = models.CharField(max_length=200,)
-  email =  models.EmailField(max_length=60, unique=True)
+  email =  models.EmailField(max_length=200, unique=True)
 
 
 class keja_tenant_dashboard(models.Model):
   id = models.AutoField(primary_key = True);
-  user = models.ForeignKey(users_model, on_delete=models.CASCADE)
+  user = models.OneToOneField(users_model, on_delete=models.CASCADE)
   my_active_rooms = models.IntegerField(default=0);
   expected_rent = models.IntegerField(default=0);
   pending_charges = models.IntegerField(default=0);

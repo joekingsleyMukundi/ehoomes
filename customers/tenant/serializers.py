@@ -13,27 +13,25 @@ class UserProfileSerializer(serializers.ModelSerializer):
         model = users_model
         fields = '__all__'
 
-class UpdateUserProfileSerializer(serializers.ModelSerializer):
-  id = serializers.IntegerField(read_only=True)
-  username = serializers.CharField(required=True)
+class UpdateUserProfileSerializer(serializers.Serializer):
   email = serializers.EmailField(required=True)
-  phone = serializers.CharField(required=True)
+  username = serializers.CharField(required=True)
+  user_phone = serializers.CharField(required=True)
   class Meta:
-    fields = ['username', 'email', 'phone']
+    fields = ['username', 'email', 'user_phone']
   
   def validate(self, data):
-    id = data.get('id')
     username = data.get('username')
     email = data.get('email')
-    phone = data.get('phone')
+    user_phone = data.get('user_phone')
+    if not username or not email or not user_phone:
+      raise db_error.ValidationError("some or all the values are missing")
     # save changed data to the database
     try:
-      user = users_model.objects.get(id=id)
+      user = users_model.objects.get(email=email)
       user.username = username
-      user.phone=phone
-      user.email = email
+      user.user_phone=user_phone
       user.save ()
       return user
     except Exception as e:
-      print(e)
       raise db_error.DbConnectionError(e)
