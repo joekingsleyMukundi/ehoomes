@@ -1,5 +1,6 @@
 from errors.auth_error import AuthenticationError
-from tenants.models import  users_model
+from tenant.models import  users_model
+import jwt
 import os
 from dotenv import load_dotenv
 load_dotenv()
