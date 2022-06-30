@@ -1,11 +1,12 @@
 from django.test import TestCase
 from tenant.models import *
+from host.models import *
 
 
 class TestModels(TestCase):
     def setUp(self):
         self.user = users_model.objects.create(username='test', user_phone='123456789', email='test@gmail.com')
-        self.host = host.objects.create(host_name='test', host_id='1',host_phone='123456789',host_email='test@gmail.com', host_date='20/12/2019')
+        self.host = host_model.objects.create(host_id='1', host_name='test', host_email='test@gmail.com', host_phone='0706373252', host_address='30456', host_city='nairobi', host_state='nairobi', host_country='kenya', host_zip='00100', host_about = 'teeestiing', host_verification_code='3040')
         self.rooms = rooms.objects.create(room_id='1', room_price=10000, room_status='test', room_image='test', room_host=self.host,room_tenant=self.user,)
 
     def test_user_model(self):
@@ -38,12 +39,11 @@ class TestModels(TestCase):
         self.assertEqual(self.keja_invoices.user.email, 'test@gmail.com')
 
     def tests_host_model(self):
-
-        self.assertEqual(self.host_model.host_name, 'test')
-        self.assertEqual(self.host_model.host_id, '1')
-        self.assertEqual(self.host_model.host_phone, '123456789')
-        self.assertEqual(self.host_model.host_email, 'test@gmail.com')
-        self.assertEqual(self.host_model.host_date, '20/12/2019')
+        self.assertEqual(self.host.host_name, 'test')
+        self.assertEqual(self.host.host_id, '1')
+        self.assertEqual(self.host.host_phone, '123456789')
+        self.assertEqual(self.host.host_email, 'test@gmail.com')
+        
 
     def test_host_dashboard_model(self):
         self.host_dashboard = host_dashboard.objects.create(host=self.host, expences=10000, revenue=20000, statment_of_operations=-30000, pending_charges = 40000, automate_payments=False, automate_managements=False, house_maintanance=1, pending_payout=20000, active_listings=2, vacants=3, active_deposits= 200000,on_hold_deposits=40000, pending_deposits=50000, booked_listings=3, active_clients=4)
