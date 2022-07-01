@@ -1,6 +1,7 @@
 from django.test import SimpleTestCase, TestCase
 from django.urls import reverse, resolve
 from tenant.views import *
+from host.views import *
 
 
 class TestUrls(SimpleTestCase):
@@ -13,6 +14,7 @@ class TestUrls(SimpleTestCase):
         url = reverse('user_profile')
         self.assertEqual(resolve(url).func, user_profile)
 
-    def test_host_dashboards_url_is_resolved(self):
-        url = reverse('host_dashboards')
+    def test_host_dashboard_url_is_resolved(self):
+        url = reverse('host_dashboard')
+        print(resolve(url).func)
         self.assertEqual(resolve(url).func, host_dashboard)

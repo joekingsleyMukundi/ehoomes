@@ -6,6 +6,7 @@ class users_model(models.Model):
   username =  models.CharField(max_length=200,)
   user_phone = models.CharField(max_length=200,)
   email =  models.EmailField(max_length=200, unique=True)
+  created_at = models.CharField(max_length=100)
 
 
 class keja_tenant_dashboard(models.Model):

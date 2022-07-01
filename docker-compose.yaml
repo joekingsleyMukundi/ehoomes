@@ -7,6 +7,8 @@ services:
     command: python manage.py runserver 0.0.0.0:8080
     ports:
       - 8080:8080
+    volumes:
+      - ./auth:/app
     env_file:
       - .env
     depends_on:
@@ -19,6 +21,8 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     ports:
       - 8000:8000
+    volumes:
+      - ./customers:/app
     env_file:
       - .env
     depends_on:
