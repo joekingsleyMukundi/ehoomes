@@ -26,6 +26,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['username'] = user.username
         token['is_active']= user.is_active
         token['email'] = user.email
+        token['is_host'] = user.is_host
         # ...
 
         return token
@@ -102,6 +103,14 @@ def set_new_password(request):
   serializer = ChangePasswordSerializer(data=request.data)
   serializer.is_valid(raise_exception = True)
   return Response({'success':True,'message':'Password reset  successfully'},status=status.HTTP_200_OK)
+
+
+@api_view(['GET','POST'])
+@permission_classes((IsAuthenticated, ))
+def update_email():
+  serializer = ChangeEmailSerializer(attrs=request.data, id=request.user.id)
+  serializer.is_valid(raise_exception=True)
+  return Response({'success':True,'message':'email reset succcess'})
 
 
 @api_view(['GET'])

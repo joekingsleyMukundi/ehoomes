@@ -18,3 +18,7 @@ class TestUrls(SimpleTestCase):
         url = reverse('host_dashboard')
         print(resolve(url).func)
         self.assertEqual(resolve(url).func, host_dashboard)
+    
+    def test_become_host_url_is_resolved(self):
+        url = reverse('become_host')
+        self.assertEqual(resolve(url).func, become_host)

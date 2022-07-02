@@ -33,10 +33,10 @@ class ChangePasswordRequestSerializer(serializers.Serializer):
                 message = 'You or someone else has initiated a password reset. if it was you click the link  to reset the password: '+url
                 send_custom_email(subject,message,user.email)
                 return attrs
-            raise Exception('user doesnot exist')
+            raise RequestValidationError('user doesnot exist')
         except Exception as e:
             print(e)
-            raise Exception(e)
+            raise RequestValidationError(e)
 
 class ChangePasswordSerializer(serializers.Serializer):
     password = serializers.CharField(min_length = 5,write_only=True)
@@ -65,4 +65,20 @@ class ChangePasswordSerializer(serializers.Serializer):
             return user;
         except Exception as e:
             print(e)
-            raise Exception(e)
+            raise RequestValidationError(e)
+
+class ChangeEmailSerializer(serializers.Serializer):
+    email = serializers.EmailField(min_length=100)
+
+    class Meta:
+        fields = ['email']
+
+    def validate(self, attrs, id):
+        email = attrs.get('email')
+        if CustomUser.objects.filter(email=email).exists():
+            raise RequestValidationError("email already exists")
+        user = CustomUser.objects.get(id=id);
+        try:
+            user.email = email
+        except Exception as e:
+            raise RequestValidationError(e)

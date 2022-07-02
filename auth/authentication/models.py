@@ -12,7 +12,7 @@ class CustomUser(AbstractUser):
   is_host = models.BooleanField(default=False)
   is_verified = models.BooleanField(default=False)
   is_active = models.BooleanField(default=False)
-  REQUIRED_FIELDS = ['username','phone']
+  REQUIRED_FIELDS = ['username']
   USERNAME_FIELD = 'email'
   
   def get_username(self):
