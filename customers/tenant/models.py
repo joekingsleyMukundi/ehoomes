@@ -3,11 +3,12 @@ from django.db import models
 # Create your models here.
 class users_model(models.Model):
   id =  models.AutoField(primary_key=True)
+  user_id = models.CharField(max_length=100)
   username =  models.CharField(max_length=200,)
   user_phone = models.CharField(max_length=200,)
   email =  models.EmailField(max_length=200, unique=True)
   created_at = models.CharField(max_length=100)
-  otp_become_host = models.IntegerField()
+  otp_become_host = models.IntegerField(default=0)
 
 
 class keja_tenant_dashboard(models.Model):
