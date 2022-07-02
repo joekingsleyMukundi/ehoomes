@@ -7,6 +7,7 @@ class users_model(models.Model):
   user_phone = models.CharField(max_length=200,)
   email =  models.EmailField(max_length=200, unique=True)
   created_at = models.CharField(max_length=100)
+  otp_become_host = models.IntegerField()
 
 
 class keja_tenant_dashboard(models.Model):
